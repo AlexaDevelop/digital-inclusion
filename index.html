@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inclusión Digital Blog</title>
+    <!-- Carga Tailwind CSS desde un CDN para un estilo rápido y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Un gris muy claro */
+        }
+        /* Definiendo colores de UNIMINUTO */
+        .color-uniminuto-blue { color: #003E7E; }
+        .color-uniminuto-yellow { color: #F6AE2D; }
+        .bg-uniminuto-blue { background-color: #003E7E; }
+        .bg-uniminuto-yellow { background-color: #F6AE2D; }
+        .border-uniminuto-blue { border-color: #003E7E; }
+        
+        .list-disc-yellow > li::marker {
+            color: #F6AE2D;
+        }
+
+        /* Estilos para los botones activos */
+        .button-active {
+            background-color: #003E7E;
+            color: white;
+        }
+
+        .button-inactive {
+            background-color: #F6AE2D;
+            color: #003E7E;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación superior que solo aparece en las páginas de blog -->
+    <nav id="blog-nav" class="bg-uniminuto-blue shadow-lg sticky top-0 z-50 hidden">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" onclick="showPage('landing')" class="text-2xl font-bold text-white">Inclusión Digital</a>
+            <!-- El contenido del header ha sido eliminado según la solicitud -->
+        </div>
+    </nav>
+
+    <!-- Botones de navegación del blog que solo aparecen en las páginas de blog -->
+    <div id="blog-buttons" class="max-w-4xl mx-auto px-4 py-4 flex flex-wrap justify-center gap-4 hidden">
+        <button id="showHome" onclick="showPage('landing')" class="font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 button-inactive">
+            HOME
+        </button>
+        <button id="showPost1" class="font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 button-inactive">
+            Parte 1
+        </button>
+        <button id="showPost2" class="font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 button-inactive">
+            Parte 2
+        </button>
+        <!-- Nuevo botón para la Parte 3 -->
+        <button id="showPost3" class="font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 button-inactive">
+            Parte 3
+        </button>
+        <!-- Botón para el Drive -->
+        <button onclick="openDriveLink('https://uniminuto0-my.sharepoint.com/:f:/g/personal/yineth_forero_uniminuto_edu_co/EoaRNvzydEdAtwe5u737EZoB0vydG1jX47saaAKAPVVn1Q?e=2RCHPC')" class="bg-uniminuto-yellow text-uniminuto-blue font-bold py-2 px-4 rounded-lg shadow-md hover:bg-uniminuto-blue hover:text-white transition duration-300">
+            DRIVE
+        </button>
+    </div>
+
+    <!-- Contenedor principal del blog, el contenido cambiará dinámicamente -->
+    <div id="blog-content" class="max-w-4xl mx-auto px-4 py-8 md:py-12">
+        <!-- El contenido se cargará aquí (página de inicio o publicaciones del blog) -->
+    </div>
+
+    <!-- Sección para un pie de página o suscripción -->
+    <footer id="blog-footer" class="mt-12 bg-white rounded-xl shadow-xl p-6 md:p-10 text-center max-w-4xl mx-auto hidden">
+        <h3 class="text-2xl font-bold color-uniminuto-blue mb-4">Mantente al día</h3>
+        <p class="text-gray-600 mb-6">Suscríbete a nuestro boletín para recibir noticias y actualizaciones del proyecto.</p>
+        <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <input type="email" placeholder="Tu correo electrónico" class="w-full sm:w-auto px-4 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-uniminuto-blue transition duration-300">
+            <button class="w-full sm:w-auto bg-uniminuto-blue text-white font-semibold py-3 px-6 rounded-lg hover:bg-uniminuto-yellow transition duration-300 shadow-lg">Suscribirme</button>
+        </div>
+    </footer>
+
+    <script>
+        // DOM content for the new landing page
+        const landingPageContent = `
+            <div class="flex flex-col items-center justify-center min-h-screen text-center p-4">
+                <div class="bg-white rounded-xl shadow-xl p-8 md:p-12 max-w-lg w-full">
+                    <!-- Título principal dentro de un recuadro para realzarlo, con el formato de 3 líneas -->
+                    <div class="bg-uniminuto-blue text-white p-4 rounded-lg shadow-md mb-8">
+                        <h1 class="text-3xl md:text-4xl font-extrabold uppercase leading-tight">
+                            3 GENERACIONES<br>
+                            1 ERA<br>
+                            LA DIGITAL
+                        </h1>
+                    </div>
+                    <!-- Recuadro para la imagen tipo card de presentación -->
+                    <div
+                    class="relative w-full h-48 rounded-xl overflow-hidden shadow-lg mb-6 bg-gray-200"
+                    style="
+                        background-image:url('https://drive.google.com/thumbnail?id=11OMaXHZpw-vSi7Y-hJ_7sVy1R2L9EZRb&sz=w1200');
+                        background-position:center;
+                        background-repeat:no-repeat;
+                        background-size:cover;
+                    "
+                    aria-label="Tarjeta de presentación UNIMINUTO">
+                    </div>
+                    <div class="space-y-2 mb-8">
+                        <h2 class="text-2xl md:text-3xl font-bold color-uniminuto-blue">Responsabilidad social.</h2>
+                        <h3 class="text-xl md:text-2xl font-semibold color-uniminuto-yellow">UNIMINUTO</h3>
+                        <p class="text-lg md:text-xl font-medium text-gray-700">Agentes de cambio</p>
+                        <p class="text-lg md:text-xl font-medium text-gray-700">Inclusión Digital</p>
+                    </div>
+                    <button onclick="showPage('post1')" class="bg-uniminuto-blue text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-uniminuto-yellow hover:text-uniminuto-blue transition duration-300 text-lg">
+                        Explorar
+                    </button>
+                </div>
+            </div>
+        `;
+
+        // DOM content for the first blog post
+        const post1Content = `
+            <article class="bg-white rounded-xl shadow-xl p-6 md:p-10">
+                <header class="mb-8 border-b border-gray-200 pb-4 text-center">
+                    <h1 class="text-4xl md:text-5xl font-extrabold color-uniminuto-blue leading-tight">
+                        Rompiendo la brecha digital
+                    </h1>
+                    <p class="mt-4 text-gray-500 text-lg">
+                        Publicado el 08 de agosto de 2025
+                    </p>
+                </header>
+                <div class="prose max-w-none text-lg leading-relaxed space-y-6">
+                    <h2 class="text-3xl md:text-4xl font-bold mt-10 color-uniminuto-blue">Presentación del proyecto</h2>
+                    <div class="rounded-xl overflow-hidden shadow-lg">
+                    <div
+                        class="w-full aspect-[4/5] bg-center bg-no-repeat bg-contain"
+                        style="background-image:url('https://drive.google.com/thumbnail?id=1f2ZJlbSoV__UCryU-lNy2UkaRx5gWgUh&sz=w1600');">
+                    </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mt-8 color-uniminuto-blue">Nuestra comunidad de aprendizaje</h3>
+                    <div class="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 mt-6">
+                        <img src="https://placehold.co/600x400/003E7E/F6AE2D?text=Foto+de+la+comunidad" alt="Foto del grupo de estudiantes y familia" class="rounded-xl shadow-lg w-full md:w-1/2 object-cover">
+                        <p class="text-gray-700 w-full md:w-1/2">
+                            Ellos son el corazón de nuestro proyecto: una familia unida por el deseo de aprender y superar la brecha digital. El Abue, con la sabiduría de los años pero la paciencia de un joven aprendiz; Nana, la pilar de su hogar, buscando herramientas digitales para empoderar a sus hijos y a sí misma; y Lito, el explorador innato, listo para dirigir su curiosidad hacia el mundo de la tecnología. Juntos, forman el perfecto microcosmos de los desafíos y las oportunidades de la inclusión digital.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+                        <div class="bg-uniminuto-blue text-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                            <!-- Foto de El Abue usando el nuevo enlace de Drive -->
+                            <div
+                                class="h-24 w-24 rounded-full mb-4 ring-2 ring-white/20 bg-gray-200 bg-center bg-cover"
+                                style="background-image:url('https://drive.google.com/thumbnail?id=1wEPFrAfBHMafkZkVo4QZJ1SZJCJUvw6l&sz=w256');"
+                                aria-label="Foto de El Abue">
+                            </div>
+                            <h4 class="text-xl font-bold">El Abue</h4>
+                            <p class="text-gray-200 mt-2 text-center">Nacido en: La era análoga</p>
+                            <p class="mt-4 text-center"><strong class="color-uniminuto-yellow">Plus:</strong> Usa Marketplace.</p>
+                            <p class="mt-2 text-center"><strong class="color-uniminuto-yellow">Necesidad:</strong> Aumentar confianza en las gestiones digitales.</p>
+                            <p class="mt-2 text-center"><strong class="color-uniminuto-yellow">'El colmo':</strong> Hace fila en la EPS para que luego de 2 horas le den un volante con un número de WhatsApp.</p>
+                        </div>
+                        <div class="bg-uniminuto-blue text-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                            <!-- Espacio circular para la foto de Nana -->
+                            <div
+                                class="h-24 w-24 rounded-full mb-4 ring-2 ring-white/20 bg-gray-200 bg-center bg-cover"
+                                style="background-image:url('https://drive.google.com/thumbnail?id=1wYhYyV-toMsxgYbCPT4p9B2NuSL56UQP&sz=w256');"
+                                aria-label="Foto de Nana">
+                            </div>
+                            <h4 class="text-xl font-bold">Nana</h4>
+                            <p class="text-gray-200 mt-2 text-center">Nacida en: La era análoga (madre de 2 niños)</p>
+                            <p class="mt-4 text-center"><strong class="color-uniminuto-yellow">Plus:</strong> Mantiene la atención de sus hijos sin pantallas.</p>
+                            <p class="mt-2 text-center"><strong class="color-uniminuto-yellow">Necesidad:</strong> Gestionar redes sociales a su favor y acceder a educación digital para sus hijos.</p>
+                            <p class="mt-2 text-center"><strong class="color-uniminuto-yellow">El colmo:</strong> No puede ofrecer sus servicios profesionales en línea o encontrar cursos para sus hijos.</p>
+                        </div>
+                        <div class="bg-uniminuto-blue text-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                            <!-- Espacio circular para la foto de Lito -->
+                            <div
+                                class="h-24 w-24 rounded-full mb-4 ring-2 ring-white/20 bg-gray-200 bg-center bg-cover"
+                                style="background-image:url('https://drive.google.com/thumbnail?id=1Nxqj44ztxufrjygeQrVgGo2KCS0fQxG6&sz=w256');"
+                                aria-label="Foto de Lito">
+                            </div>
+                            <h4 class="text-xl font-bold">Lito</h4>
+                            <p class="text-gray-200 mt-2 text-center">Nacido en: La era digital</p>
+                            <p class="mt-4 text-center"><strong class="color-uniminuto-yellow">Plus:</strong> Mantiene la concentración y le gustan los Legos.</p>
+                            <p class="mt-2 text-center"><strong class="color-uniminuto-yellow">Necesidad:</strong> Uso de herramientas tecnológicas y aprendizaje guiado con IAs.</p>
+                            <p class="mt-2 text-center"><strong class="color-uniminuto-yellow">'El colmo':</strong> Se está quedando atrás en el uso de herramientas tecnológicas modernas a pesar de ser nativo digital.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección "¿Dónde?" -->
+                <div class="prose max-w-none text-lg leading-relaxed space-y-6 mt-10">
+                    <h2 class="text-3xl md:text-4xl font-bold mt-10 color-uniminuto-blue text-center">¿Dónde?</h2>
+                    <p class="text-gray-700">
+                        Nuestra labor se enfoca en una comunidad específica, trabajando de cerca para entender sus necesidades y ofrecer soluciones personalizadas.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+ <div class="flex flex-col items-center">
+						  <div class="w-full rounded-xl shadow-lg overflow-hidden">
+							<div
+							  class="w-full aspect-[4/3] bg-center bg-no-repeat bg-contain bg-gray-100"
+							  style="background-image:url('https://drive.google.com/thumbnail?id=1JLmyEWwWnutNHkMyLMNCWOfFs8QaaezM&sz=w1600');"
+							  role="img" aria-label="Foto de Colombia">
+							</div>
+						  </div>
+						  <p class="mt-2 text-gray-700 font-semibold">Colombia</p>
+						</div>
+						<div class="flex flex-col items-center">
+						  <div class="w-full rounded-xl shadow-lg overflow-hidden">
+							<div
+							  class="w-full aspect-[4/3] bg-center bg-no-repeat bg-contain bg-gray-100"
+							  style="background-image:url('https://drive.google.com/thumbnail?id=1FdBGTZWTnaE5_DacTQ0n0Gu5mrTWiJA-&sz=w1600');"
+							  role="img" aria-label="Mapa del Meta">
+							</div>
+						  </div>
+						  <p class="mt-2 text-gray-700 font-semibold">Depto. del Meta</p>
+						</div>
+                        <div class="flex flex-col items-center">
+						  <div class="w-full rounded-xl shadow-lg overflow-hidden">
+							<div
+							  class="w-full aspect-[4/3] bg-center bg-no-repeat bg-contain bg-gray-100"
+							  style="background-image:url('https://drive.google.com/thumbnail?id=1HlpMFmtSj3e41IHudMnhp0l30t_295HW&sz=w1600');"
+							  role="img" aria-label="Foto de villavicencio">
+							</div>
+						  </div>
+						  <p class="mt-2 text-gray-700 font-semibold">Villavicencio</p>
+						</div>
+						<div class="flex flex-col items-center">
+						  <div class="w-full rounded-xl shadow-lg overflow-hidden">
+							<div
+							  class="w-full aspect-[4/3] bg-center bg-no-repeat bg-contain bg-gray-100"
+							  style="background-image:url('https://drive.google.com/thumbnail?id=16FzRI_6Fr_VRiEmJHsPCfAbpFdCKmszP&sz=w1600');"
+							  role="img" aria-label="Foto de La casa familiar">
+							</div>
+						  </div>
+						  <p class="mt-2 text-gray-700 font-semibold">La casa familiar</p>
+						</div>
+                    </div>
+                </div>
+
+                <!-- Sección "Modalidad" -->
+                <div class="prose max-w-none text-lg leading-relaxed space-y-6 mt-10">
+                    <h2 class="text-3xl md:text-4xl font-bold mt-10 color-uniminuto-blue text-center">Modalidad</h2>
+                    <p class="bg-uniminuto-yellow text-uniminuto-blue p-6 rounded-xl shadow-md text-center font-semibold">
+                        Porque en la calidez de la presencialidad se cultiva la confianza en lo digital.
+                    </p>
+
+                    <!-- Nueva descripción de la modalidad -->
+                    <div class="bg-gray-100 p-6 rounded-xl shadow-md flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 mt-6">
+                        <!-- Placeholder de la imagen de calendario -->
+						<div
+						  class="rounded-xl shadow-lg h-24 w-24 object-cover bg-center bg-no-repeat bg-contain"
+						  style="background-image:url('https://drive.google.com/thumbnail?id=1NiRvzsJvMvsdGrrPv3AkjkA1kziKFBuc&sz=w1600');"
+						  role="img" aria-label="Foto de Evolucion">
+						</div>
+                        <div class="text-gray-700 w-full">
+                            <h4 class="text-xl font-bold color-uniminuto-blue mb-2">Horario de Encuentros</h4>
+                            <p><strong>Semana 1:</strong> 29 y 31 de Julio</p>
+                            <p><strong>Semana 2:</strong> 5 y 7 de Agosto</p>
+                            <p><strong>Días:</strong> Martes y Jueves</p>
+                            <p><strong>Hora:</strong> 7 pm a 9 pm</p>
+                            <p><strong>Lugar:</strong> Casa de Nana</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        `;
+
+        // DOM content for the second blog post (PARTE 2)
+        const post2Content = `
+            <article class="bg-white rounded-xl shadow-xl p-6 md:p-10">
+                <header class="mb-8 border-b border-gray-200 pb-4 text-center">
+                     <!-- Título de la Parte 2 con el mismo estilo que la página de inicio -->
+                     <div class="bg-uniminuto-blue text-white p-4 rounded-lg shadow-md mb-8">
+                        <h1 class="text-3xl md:text-4xl font-extrabold uppercase leading-tight text-center">
+                            3 GENERACIONES<br>
+                            1 ERA<br>
+                            LA DIGITAL
+                        </h1>
+                    </div>
+                </header>
+                <div class="prose max-w-none text-lg leading-relaxed space-y-6">
+                    <!-- Banner con la evolución tecnológica -->
+					<div
+					  class="rounded-xl shadow-md h-48 bg-center bg-no-repeat bg-contain"
+					  style="background-image:url('https://drive.google.com/thumbnail?id=1N_2mb1DhGMSX7GbHELtF-_fjEECxh3vP&sz=w1600');"
+					  role="img" aria-label="Foto de Evolucion">
+					</div>
+
+                    <h2 class="text-3xl md:text-4xl font-bold mt-10 color-uniminuto-blue text-center">Problemática</h2>
+                    <ul class="list-disc list-inside space-y-2 ml-4 list-disc-yellow">
+                        <li>xxxx</li>
+                        <li>xxxx</li>
+                    </ul>
+
+                    <h2 class="text-3xl md:text-4xl font-bold mt-10 color-uniminuto-blue text-center">Análisis a profundidad</h2>
+                    <p class="text-gray-700">
+                        xxxxxx
+                    </p>
+                    
+                    <h2 class="text-3xl md:text-4xl font-bold mt-10 color-uniminuto-blue text-center">Objetivo General</h2>
+                    <p class="text-gray-700">
+                        xxxxx
+                    </p>
+
+                    <h2 class="text-3xl md:text-4xl font-bold mt-10 color-uniminuto-blue text-center">Objetivo específico</h2>
+                    <ul class="list-disc list-inside space-y-2 ml-4 list-disc-yellow">
+                        <li>xxxxx</li>
+                        <li>xxxx</li>
+                        <li>xxxx</li>
+                    </ul>
+
+                    <!-- Nueva sección: Plan de trabajo -->
+                    <h2 class="text-3xl md:text-4xl font-bold mt-10 color-uniminuto-blue text-center">Plan de trabajo</h2>
+                    <p class="text-gray-700">
+                        xxxxx
+                    </p>
+                    <div class="relative w-full h-64 rounded-xl overflow-hidden shadow-lg mb-6 flex justify-center items-center bg-gray-200">
+                        <img src="https://placehold.co/600x400/003E7E/F6AE2D?text=Imagen+del+Plan+de+Trabajo" alt="Imagen del plan de trabajo" class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+
+                    <!-- Nueva sección: Modalidad de evaluacion -->
+                    <h2 class="text-3xl md:text-4xl font-bold mt-10 color-uniminuto-blue text-center">Modalidad de evaluación</h2>
+                    <p class="text-gray-700">
+                        xxxxx
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                        <div class="relative w-full h-64 rounded-xl overflow-hidden shadow-lg flex justify-center items-center bg-gray-200">
+                            <img src="https://placehold.co/400x300/003E7E/F6AE2D?text=Foto+1+de+evaluación" alt="Foto de la modalidad de evaluación" class="absolute inset-0 w-full h-full object-cover">
+                        </div>
+                        <div class="relative w-full h-64 rounded-xl overflow-hidden shadow-lg flex justify-center items-center bg-gray-200">
+                            <img src="https://placehold.co/400x300/003E7E/F6AE2D?text=Foto+2+de+evaluación" alt="Foto de la modalidad de evaluación" class="absolute inset-0 w-full h-full object-cover">
+                        </div>
+                        <div class="relative w-full h-64 rounded-xl overflow-hidden shadow-lg flex justify-center items-center bg-gray-200">
+                            <img src="https://placehold.co/400x300/003E7E/F6AE2D?text=Foto+3+de+evaluación" alt="Foto de la modalidad de evaluación" class="absolute inset-0 w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </article>
+        `;
+
+        // DOM content for the third blog post (PARTE 3)
+        const post3Content = `
+            <article class="bg-white rounded-xl shadow-xl p-6 md:p-10">
+                <header class="mb-8 border-b border-gray-200 pb-4 text-center">
+                     <!-- Título de la Parte 3 con el mismo estilo que la página de inicio -->
+                     <div class="bg-uniminuto-blue text-white p-4 rounded-lg shadow-md mb-8">
+                        <h1 class="text-3xl md:text-4xl font-extrabold uppercase leading-tight text-center">
+                            3 GENERACIONES<br>
+                            1 ERA<br>
+                            LA DIGITAL
+                        </h1>
+                    </div>
+                </header>
+                <div class="prose max-w-none text-lg leading-relaxed space-y-6">
+                    <h2 class="text-3xl md:text-4xl font-bold mt-10 color-uniminuto-blue text-center">Clase 1</h2>
+                    <div class="bg-gray-100 p-6 rounded-xl shadow-md text-gray-700">
+                        <p><strong>Fecha:</strong> Martes 29 de Julio de 2025</p>
+                        <p><strong>Modalidad de la actividad:</strong> Práctica.</p>
+                        <p><strong>Objetivo:</strong> xxxx</p>
+                        <p><strong>Retos:</strong> xxxxx</p>
+                        <p><strong>Logros:</strong> xxxxx</p>
+                        <p><strong>Tarea:</strong> xxxx</p>
+                    </div>
+
+                    <h2 class="text-3xl md:text-4xl font-bold mt-10 color-uniminuto-blue text-center">Comentarios de los estudiantes</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+                        <div class="bg-uniminuto-blue text-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                            <p class="text-center">xxxxx</p>
+                        </div>
+                        <div class="bg-uniminuto-blue text-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                            <p class="text-center">xxxxx</p>
+                        </div>
+                        <div class="bg-uniminuto-blue text-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                            <p class="text-center">xxxxx</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                        <div class="relative w-full h-64 rounded-xl overflow-hidden shadow-lg flex justify-center items-center bg-gray-200">
+                            <img src="https://placehold.co/400x300/003E7E/F6AE2D?text=Foto+1+de+estudiante" alt="Foto de un estudiante" class="absolute inset-0 w-full h-full object-cover">
+                        </div>
+                        <div class="relative w-full h-64 rounded-xl overflow-hidden shadow-lg flex justify-center items-center bg-gray-200">
+                            <img src="https://placehold.co/400x300/003E7E/F6AE2D?text=Foto+2+de+estudiante" alt="Foto de un estudiante" class="absolute inset-0 w-full h-full object-cover">
+                        </div>
+                        <div class="relative w-full h-64 rounded-xl overflow-hidden shadow-lg flex justify-center items-center bg-gray-200">
+                            <img src="https://placehold.co/400x300/003E7E/F6AE2D?text=Foto+3+de+estudiante" alt="Foto de un estudiante" class="absolute inset-0 w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                    <!-- Nueva sección para la Clase 2 -->
+                    <h2 class="text-3xl md:text-4xl font-bold mt-10 color-uniminuto-blue text-center">Clase 2</h2>
+                    <div class="bg-gray-100 p-6 rounded-xl shadow-md text-gray-700">
+                        <p><strong>Fecha:</strong> Martes 31 de Julio de 2025</p>
+                        <p><strong>Modalidad de la actividad:</strong> Práctica.</p>
+                        <p><strong>Objetivo:</strong> xxxx</p>
+                        <p><strong>Retos:</strong> xxxxx</p>
+                        <p><strong>Logros:</strong> xxxxx</p>
+                        <p><strong>Tarea:</strong> xxxx</p>
+                    </div>
+
+                    <h2 class="text-3xl md:text-4xl font-bold mt-10 color-uniminuto-blue text-center">Comentarios de los estudiantes</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+                        <div class="bg-uniminuto-blue text-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                            <p class="text-center">xxxxx</p>
+                        </div>
+                        <div class="bg-uniminuto-blue text-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                            <p class="text-center">xxxxx</p>
+                        </div>
+                        <div class="bg-uniminuto-blue text-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                            <p class="text-center">xxxxx</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        `;
+
+        const blogContent = document.getElementById('blog-content');
+        const blogNav = document.getElementById('blog-nav');
+        const blogButtons = document.getElementById('blog-buttons');
+        const blogFooter = document.getElementById('blog-footer');
+        const showHomeBtn = document.getElementById('showHome');
+        const showPost1Btn = document.getElementById('showPost1');
+        const showPost2Btn = document.getElementById('showPost2');
+        const showPost3Btn = document.getElementById('showPost3');
+
+        // Function to display a specific page (landing, post1, or post2)
+        function showPage(pageId) {
+            // Hide all blog-related elements first
+            blogNav.classList.add('hidden');
+            blogButtons.classList.add('hidden');
+            blogFooter.classList.add('hidden');
+            blogContent.innerHTML = '';
+
+            // Reset button styles to inactive state
+            showHomeBtn.classList.remove('button-active');
+            showHomeBtn.classList.add('button-inactive');
+            showPost1Btn.classList.remove('button-active');
+            showPost1Btn.classList.add('button-inactive');
+            showPost2Btn.classList.remove('button-active');
+            showPost2Btn.classList.add('button-inactive');
+            showPost3Btn.classList.remove('button-active');
+            showPost3Btn.classList.add('button-inactive');
+
+            if (pageId === 'landing') {
+                blogContent.innerHTML = landingPageContent;
+            } else if (pageId === 'post1') {
+                blogContent.innerHTML = post1Content;
+                blogNav.classList.remove('hidden');
+                blogButtons.classList.remove('hidden');
+                blogFooter.classList.remove('hidden');
+                showPost1Btn.classList.add('button-active');
+                showPost1Btn.classList.remove('button-inactive');
+            } else if (pageId === 'post2') {
+                blogContent.innerHTML = post2Content;
+                blogNav.classList.remove('hidden');
+                blogButtons.classList.remove('hidden');
+                blogFooter.classList.remove('hidden');
+                showPost2Btn.classList.add('button-active');
+                showPost2Btn.classList.remove('button-inactive');
+            } else if (pageId === 'post3') {
+                blogContent.innerHTML = post3Content;
+                blogNav.classList.remove('hidden');
+                blogButtons.classList.remove('hidden');
+                blogFooter.classList.remove('hidden');
+                showPost3Btn.classList.add('button-active');
+                showPost3Btn.classList.remove('button-inactive');
+            }
+        }
+
+        // Function to open the Drive link. Ahora acepta un parámetro 'url'.
+        function openDriveLink(url) {
+            // Abre el enlace en una nueva pestaña
+            window.open(url, '_blank');
+        }
+
+        // Event listeners for the navigation buttons
+        showHomeBtn.addEventListener('click', () => showPage('landing'));
+        showPost1Btn.addEventListener('click', () => showPage('post1'));
+        showPost2Btn.addEventListener('click', () => showPage('post2'));
+        showPost3Btn.addEventListener('click', () => showPage('post3'));
+
+        // Load the landing page by default
+        showPage('landing');
+    </script>
+</body>
+</html>
