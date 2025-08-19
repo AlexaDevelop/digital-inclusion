@@ -59,6 +59,10 @@
         <button id="showPost3" class="font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 button-inactive">
             Entrada 3
         </button>
+        <!-- NUEVO: Botón para la Entrada 4 -->
+        <button id="showPost4" class="font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 button-inactive">
+            Entrada 4
+        </button>
         <!-- Botón para el Drive -->
         <button onclick="openDriveLink('https://uniminuto0-my.sharepoint.com/:f:/g/personal/yineth_forero_uniminuto_edu_co/EoaRNvzydEdAtwe5u737EZoBkDBDWw7xsb6DLNAyCIxozA?e=uJqJoq')" class="bg-uniminuto-yellow text-uniminuto-blue font-bold py-2 px-4 rounded-lg shadow-md hover:bg-uniminuto-blue hover:text-white transition duration-300">
             DRIVE
@@ -411,6 +415,46 @@
                 </div>
             </article>
         `;
+        
+        // NUEVO: Contenido para la nueva entrada 4
+        const post4Content = `
+            <article class="bg-white rounded-xl shadow-xl p-6 md:p-10">
+                <header class="mb-8 border-b border-gray-200 pb-4 text-center">
+                     <div class="bg-uniminuto-blue text-white p-4 rounded-lg shadow-md mb-8">
+                        <h1 class="text-3xl md:text-4xl font-extrabold uppercase leading-tight text-center">
+                            3 GENERACIONES<br>
+                            1 ERA<br>
+                            LA DIGITAL
+                        </h1>
+                    </div>
+                </header>
+                <div class="prose max-w-none text-lg leading-relaxed space-y-6">
+                    <h2 class="text-3xl md:text-4xl font-bold mt-10 color-uniminuto-blue text-center">Clase 4</h2>
+                    <div class="bg-gray-100 p-6 rounded-xl shadow-md text-gray-700">
+                        <p><strong>Fecha:</strong> Miércoles 7 de agosto de 2024</p>
+                        <p><strong>Modalidad de la actividad:</strong> Práctica.</p>
+                        <p><strong>Objetivo:</strong> Conocer y manejar las funciones principales de la aplicación de Facebook.</p>
+                        <p><strong>Retos:</strong> Reconocer la interfaz y funcionalidades de Facebook.</p>
+                        <p><strong>Logros:</strong> Los estudiantes lograron iniciar sesión en la aplicación, entender cómo ver publicaciones, cómo dar "me gusta" y cómo reaccionar a las publicaciones.</p>
+                        <p><strong>Tarea:</strong> Explorar la aplicación en sus casas y reaccionar a las publicaciones de sus familiares.</p>
+                    </div>
+
+                    <h2 class="text-3xl md:text-4xl font-bold mt-10 color-uniminuto-blue text-center">Comentarios de los estudiantes</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+                        <div class="bg-uniminuto-blue text-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                            <p class="text-center">"No sabía que Facebook era tan fácil de usar, me sentía un poco perdida pero ahora me atrevo a explorarla más. ” - <strong class="color-uniminuto-yellow">Luz Marina Ruiz.</strong></p>
+                        </div>
+                        <div class="bg-uniminuto-blue text-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                            <p class="text-center">"Me gusta ver las fotos de mi familia y amigos, ahora puedo darles un 'me gusta'. ” - <strong class="color-uniminuto-yellow">Martha Liliana Herrera.</strong></p>
+                        </div>
+                        <div class="bg-uniminuto-blue text-white p-6 rounded-xl shadow-md flex flex-col items-center">
+                            <p class="text-center">“Me siento más conectada con mis seres queridos. ” - <strong class="color-uniminuto-yellow">María Eugenia Vargas.</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        `;
+
 
         const blogContent = document.getElementById('blog-content');
         const blogNav = document.getElementById('blog-nav');
@@ -420,6 +464,8 @@
         const showPost1Btn = document.getElementById('showPost1');
         const showPost2Btn = document.getElementById('showPost2');
         const showPost3Btn = document.getElementById('showPost3');
+        // NUEVO: Referencia al nuevo botón de la entrada 4
+        const showPost4Btn = document.getElementById('showPost4');
 
         // Function to display a specific page (landing, post1, or post2)
         function showPage(pageId) {
@@ -438,6 +484,10 @@
             showPost2Btn.classList.add('button-inactive');
             showPost3Btn.classList.remove('button-active');
             showPost3Btn.classList.add('button-inactive');
+            // NUEVO: Resetear el nuevo botón de la entrada 4
+            showPost4Btn.classList.remove('button-active');
+            showPost4Btn.classList.add('button-inactive');
+
 
             if (pageId === 'landing') {
                 blogContent.innerHTML = landingPageContent;
@@ -462,6 +512,14 @@
                 blogFooter.classList.remove('hidden');
                 showPost3Btn.classList.add('button-active');
                 showPost3Btn.classList.remove('button-inactive');
+            // NUEVO: Lógica para la nueva entrada 4
+            } else if (pageId === 'post4') {
+                blogContent.innerHTML = post4Content;
+                blogNav.classList.remove('hidden');
+                blogButtons.classList.remove('hidden');
+                blogFooter.classList.remove('hidden');
+                showPost4Btn.classList.add('button-active');
+                showPost4Btn.classList.remove('button-inactive');
             }
         }
 
@@ -476,6 +534,9 @@
         showPost1Btn.addEventListener('click', () => showPage('post1'));
         showPost2Btn.addEventListener('click', () => showPage('post2'));
         showPost3Btn.addEventListener('click', () => showPage('post3'));
+        // NUEVO: Event listener para el botón de la entrada 4
+        showPost4Btn.addEventListener('click', () => showPage('post4'));
+
 
         // Load the landing page by default
         showPage('landing');
