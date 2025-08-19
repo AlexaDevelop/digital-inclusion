@@ -88,39 +88,41 @@
         // DOM content for the new landing page
         const landingPageContent = `
             <div class="flex flex-col items-center justify-center min-h-screen text-center p-4">
-                <div class="bg-white rounded-xl shadow-xl p-8 md:p-12 max-w-lg w-full">
-                    <!-- Título principal dentro de un recuadro para realzarlo, con el formato de 3 líneas -->
-                    <div class="bg-uniminuto-blue text-white p-4 rounded-lg shadow-md mb-8">
-                        <h1 class="text-3xl md:text-4xl font-extrabold uppercase leading-tight">
-                            3 GENERACIONES<br>
-                            1 ERA<br>
-                            LA DIGITAL
-                        </h1>
+                <div class="absolute inset-0 bg-cover bg-center opacity-75" style="background-image: url('https://drive.google.com/thumbnail?id=1nF3_T2T8KYmQXLOURxmh0ciIQyV5UoPJ&sz=w1200'); background-size: cover;">
+                </div>
+                <!-- Contenido principal centrado sobre la imagen de fondo -->
+                <div class="relative z-10 flex flex-col items-center justify-center min-h-screen text-center p-4">
+                    <div class="bg-white rounded-xl shadow-xl p-8 md:p-12 max-w-lg w-full">
+                        <!-- Ajuste 2: Nuevo titulo del blog -->
+                        <div class="bg-uniminuto-blue text-white p-4 rounded-lg shadow-md mb-8">
+                            <h1 class="text-3xl md:text-4xl font-extrabold leading-tight">
+                                BLOG<br>
+                                Responsabilidad Social<br>
+                                una práctica de vida
+                            </h1>
+                        </div>
+                        <!-- Ajuste 2: Recuadro resaltado para el titulo de la era digital -->
+                        <div class="bg-uniminuto-yellow text-uniminuto-blue font-bold p-4 rounded-lg shadow-md mb-8">
+                            <h2 class="text-lg md:text-xl font-bold">
+                                "3 Generaciones una misma Era: La digital."
+                            </h2>
+                        </div>
+
+                        <!-- Ajuste 3: Recuadro que contiene la información de UNIMINUTO y el botón Explorar -->
+                        <div class="bg-gray-100 p-6 rounded-xl shadow-md space-y-4">
+                            <div class="space-y-2">
+                                <h2 class="text-2xl md:text-3xl font-bold color-uniminuto-blue">UNIMINUTO</h2>
+                                <h3 class="text-xl md:text-2xl font-semibold color-uniminuto-yellow">Agentes de cambio</h3>
+                                <p class="text-lg md:text-xl font-medium text-gray-700">Inclusión Digital</p>
+                            </div>
+                            <button onclick="showPage('post1')" class="bg-uniminuto-blue text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-uniminuto-yellow hover:text-uniminuto-blue transition duration-300 text-lg">
+                                Explorar
+                            </button>
+                        </div>
                     </div>
-                    <!-- Recuadro para la imagen tipo card de presentación -->
-                    <div
-                    class="relative w-full h-48 rounded-xl overflow-hidden shadow-lg mb-6 bg-gray-200"
-                    style="
-                        background-image:url('https://drive.google.com/thumbnail?id=11OMaXHZpw-vSi7Y-hJ_7sVy1R2L9EZRb&sz=w1200');
-                        background-position:center;
-                        background-repeat:no-repeat;
-                        background-size:cover;
-                    "
-                    aria-label="Tarjeta de presentación UNIMINUTO">
-                    </div>
-                    <div class="space-y-2 mb-8">
-                        <h2 class="text-2xl md:text-3xl font-bold color-uniminuto-blue">Responsabilidad social.</h2>
-                        <h3 class="text-xl md:text-2xl font-semibold color-uniminuto-yellow">UNIMINUTO</h3>
-                        <p class="text-lg md:text-xl font-medium text-gray-700">Agentes de cambio</p>
-                        <p class="text-lg md:text-xl font-medium text-gray-700">Inclusión Digital</p>
-                    </div>
-                    <button onclick="showPage('post1')" class="bg-uniminuto-blue text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-uniminuto-yellow hover:text-uniminuto-blue transition duration-300 text-lg">
-                        Explorar
-                    </button>
                 </div>
             </div>
         `;
-
         // DOM content for the first blog post
         const post1Content = `
             <article class="bg-white rounded-xl shadow-xl p-6 md:p-10">
